@@ -57,4 +57,10 @@ public class GymLeader {
     public void setDefeated(boolean defeated) {
         isDefeated = defeated;
     }
+
+    @Override
+    public String toString(){
+        return (leaderPokemon == null)? "Your hometown has no Gym."
+                : leaderName + " - " + leaderPokemon.getType() + " type";
+    }
 }
