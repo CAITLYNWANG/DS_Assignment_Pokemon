@@ -28,6 +28,15 @@ public class Pokemon {
     public void addMove(Moves move){
         this.movesList.add(move);
     }
+    public String displayMoves(ArrayList<Moves> movesList) {
+        StringBuilder sb = new StringBuilder();
+        for (Moves move : movesList) {
+            sb.append("- ").append(move.getMoveName())
+                    .append(" [").append(move.getAttack())
+                    .append(" damage]").append("\n");
+        }
+        return sb.toString();
+    }
 
 
     public String getName() {
@@ -49,20 +58,27 @@ public class Pokemon {
     public String[] getStrongAgainst() {
         return strongAgainst;
     }
-
-    public void setStrongAgainst(String[] strongAgainst) {
-        //TODO: use I/O to read Pokemon's attributes
-    }
-
-    public void getWeakAgainst() {
-        for(String weak: weakAgainst){
-
+    public String displayStrongAgainst(String[] strongAgainst){
+        StringBuilder sb = new StringBuilder();
+        for(String sa: strongAgainst){
+            sb.append("- ").append(sa).append("\n");
         }
+        return sb.toString();
     }
 
-    public void setWeakAgainst(String[] weakAgainst) {
-        //TODO: use I/O to read Pokemon's attributes
+    public String[] getWeakAgainst() {
+        return weakAgainst;
     }
+
+    public String displayWeakAgainst(String[] weakAgainst){
+        StringBuilder sb = new StringBuilder();
+        for(String wa: weakAgainst){
+            sb.append("- ").append(wa).append("\n");
+        }
+        return sb.toString();
+    }
+
+
 
     public int getLevel() {
         return level;
@@ -110,17 +126,25 @@ public class Pokemon {
 
 
     public void levelUp() {
-        //this.hp += ?;
-        this.level++;
         for(Moves move: movesList){
             move.setAttack(move.getAttack() + 2);
         }
+        System.out.println(name + " leveled up.");
+        System.out.println(name + "[ Level " + level + " --> " + "Level " + (++level));
     }
 
     @Override
     public String toString() {
-        //TODO: use I/O to read Pokemon's attributes
-        return null;
+        return name + " - " + "Level: " + level + "\n"
+                + "Type: " + type +"\n"
+                + "HP: " + hp + "\n"
+                + "XP: " + xp + "\n"
+                + "Moves: " + "\n"
+                + displayMoves(movesList)
+                + "Strong Against: " + "\n"
+                + displayStrongAgainst(strongAgainst)
+                +"Weak Against: " + "\n"
+                + displayWeakAgainst(weakAgainst);
 
     }
 }
