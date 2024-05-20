@@ -17,8 +17,8 @@ public class City {
         this.connections = new ArrayList<>();
     }
 
-    public void addConnection(String city, int weight){
-        connections.add(new Connection(city, weight));
+    public void addConnection(String cityName, int weight){
+        connections.add(new Connection(cityName, weight));
     }
 
     public void addCatchablePokemon(Pokemon pokemon){
@@ -33,7 +33,29 @@ public class City {
         return name;
     }
 
+    public void setGymLeader(GymLeader gymLeader) {
+        this.gymLeader = gymLeader;
+    }
+
     public List<Connection> getConnections() {
         return connections;
+    }
+    public void displayCatchablePokemon(){
+        if(!catchablePokemons.isEmpty()){
+            System.out.print("[");
+            for(int i = 0; i < catchablePokemons.size(); i++){
+                if(i < catchablePokemons.size() - 1){
+                    System.out.print(catchablePokemons.get(i) + ", ");
+                }else{
+                    System.out.println(catchablePokemons.get(i) + " are common]");
+                }
+            }
+        }else{
+            System.out.println(" ");
+        }
+    }
+
+    public void displayGymLeader(){
+        gymLeader.toString();
     }
 }

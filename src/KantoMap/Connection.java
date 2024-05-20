@@ -3,8 +3,8 @@ package KantoMap;
 public class Connection{
     private String cityName;
     private  int weight;
-    public Connection(String city, int weight){
-        this.cityName = city;
+    public Connection(String cityName, int weight){
+        this.cityName = cityName;
         this.weight = weight;
     }
 
