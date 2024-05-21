@@ -15,10 +15,7 @@ public class Moves{
     public String getMoveName() {
         return moveName;
     }
-
-    public void setMoveName(String moveName) {
-        this.moveName = moveName;
-    }
+    
 
     public int getAttack() {
         return attack;
@@ -27,4 +24,5 @@ public class Moves{
     public void setAttack(int attack) {
         this.attack = attack;
     }
+
 }
