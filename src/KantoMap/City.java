@@ -15,6 +15,7 @@ public class City {
     public City(String name){
         this.name = name;
         this.connections = new ArrayList<>();
+        this.catchablePokemons = new ArrayList<>();
     }
 
     public void addConnection(String cityName, int weight){
