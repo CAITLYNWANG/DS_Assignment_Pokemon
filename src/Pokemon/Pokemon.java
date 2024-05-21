@@ -8,6 +8,7 @@ public class Pokemon {
 
     protected int level;
     protected int hp;
+    protected int showHp;
     protected int xp;
     protected ArrayList<Moves> movesList;
 
@@ -17,6 +18,7 @@ public class Pokemon {
         this.type = type;
         this.level = level;
         this.hp = hp;
+        this.showHp = hp;
         this.xp = 0;
         this.movesList = new ArrayList<>();
     }
@@ -28,7 +30,7 @@ public class Pokemon {
     public void addMove(Moves move){
         this.movesList.add(move);
     }
-    public String displayMoves(ArrayList<Moves> movesList) {
+    public String displayMoves() {
         StringBuilder sb = new StringBuilder();
         for (Moves move : movesList) {
             sb.append("- ").append(move.getMoveName())
@@ -96,9 +98,16 @@ public class Pokemon {
         this.hp = hp;
     }
 
+    public int getShowHp() {
+        return showHp;
+    }
 
     public int getXp() {
         return xp;
+    }
+
+    public ArrayList<Moves> getMovesList() {
+        return movesList;
     }
 
     public void setXp(int xp) {
@@ -126,6 +135,8 @@ public class Pokemon {
 
 
     public void levelUp() {
+        this.hp += 20;
+        this.showHp += 20;
         for(Moves move: movesList){
             move.setAttack(move.getAttack() + 2);
         }
@@ -140,7 +151,7 @@ public class Pokemon {
                 + "HP: " + hp + "\n"
                 + "XP: " + xp + "\n"
                 + "Moves: " + "\n"
-                + displayMoves(movesList)
+                + displayMoves()
                 + "Strong Against: " + "\n"
                 + displayStrongAgainst(strongAgainst)
                 +"Weak Against: " + "\n"
