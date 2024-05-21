@@ -4,7 +4,7 @@ import Pokemon.*;
 import Character.Blaine;
 public class CinnabarIsland extends City{
     public CinnabarIsland(){
-        super("Cinnarbar Island");
+        super("Cinnabar Island");
         //Implement the connection
         this.addConnection("Pallet Town", 7);
         this.addConnection("Fuschia City", 5);
