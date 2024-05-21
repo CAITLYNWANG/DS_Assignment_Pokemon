@@ -8,7 +8,7 @@ public class Connection{
         this.weight = weight;
     }
 
-    public String getCity() {
+    public String getCityName() {
         return cityName;
     }
 
