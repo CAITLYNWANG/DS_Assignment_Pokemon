@@ -1,5 +1,5 @@
 # TOPIC 2: POKÉMON – KANTO ADVENTURE
-### YEAR 1 SEM 2(24/25) Data Structure Assignment of OCC 1 Group 6
+### YEAR 1 SEM 2 (24/25) Data Structure Assignment of OCC 1 Group 6
 
 * Path of Champions - Region Explorer (1 mark)
 * Memory Cartridge - Saving Progress (1 mark)
