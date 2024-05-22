@@ -1,9 +1,10 @@
 package util;
+import java.util.List;
 import java.util.Scanner;
 import java.lang.*;
 
 public class StructureService {
-    static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     public static int readChoice(String prompt,int playerChoice){
         int input;
@@ -41,12 +42,6 @@ public class StructureService {
         return input;
     }
 
-    public static void clearScreen(){
-        for(int i = 0; i < 20; i++){
-            System.out.println();
-        }
-    }
-
     public static void lineSeperator(){
         System.out.print("+");
         for(int i = 0; i < 20; i++){
@@ -65,5 +60,14 @@ public class StructureService {
         System.out.println(ColorText.colorText(str,ColorText.CYAN));
         lineSeperator();
     }
+
+    public static void printASCII(String scenario){
+        List<String> Arts = ASCIIart.addASCIIArt();
+        if(scenario.equals("title")){
+            System.out.println(ColorText.colorText(Arts.get(0),ColorText.BLUE));
+        }
+    }
+
+
 
 }
