@@ -11,8 +11,8 @@ public class Trainer {
     public Trainer() {
         this.location = "Pallet Town";
         this.username = null;
-        this.team = null;
-        this.badges = null;
+        this.team = new ArrayList<>();
+        this.badges = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -31,7 +31,7 @@ public class Trainer {
         this.location = location;
     }
 
-    public void getTeam() {
+    public void displayTeam() {
         System.out.println("Your Team: ");
         if(team.isEmpty()){
             System.out.println("- None");
@@ -43,20 +43,28 @@ public class Trainer {
         }
     }
 
+    public ArrayList<Pokemon> getTeam() {
+        return team;
+    }
+
     public void addNewPokemon(Pokemon pokemon) {
         this.team.add(pokemon);
     }
 
-    public void getBadges() {
+    public void displayBadges() {
         System.out.println("Your Badges: ");
         if(badges.isEmpty()){
-            System.out.print("- None");
+            System.out.println("- None");
         }
         else{
             for(String badge: badges){
                 System.out.println("- " + badge);
             }
         }
+    }
+
+    public ArrayList<String> getBadges(){
+        return this.badges;
     }
 
     public void addBadges(String newBadges) {
