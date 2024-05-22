@@ -3,7 +3,7 @@ import KantoMap.*;
 import util.StructureService;
 
 public class RivalRace {
-    public void rivalRace(){
+    public void rivalRaceChallenge(){
         Map map = new Map();
         System.out.print("The battle has begun! Your rival Gary has challenged you to a race to ");
         City destination = map.randomDestination();
