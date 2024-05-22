@@ -1,9 +1,9 @@
 package Pokemon;
 
 public class Squirtle extends Pokemon{
-    //Viridian City Catchable
+    //Trainer initial choice
     public Squirtle() {
-        super("Squirtle", "Water", 45, 100, 225);
+        super("Squirtle", "Water", 5, 100, 25);
         this.weakAgainst = new String[]{"Electric", "Grass"};
         this.strongAgainst = new String[]{"Fire", "Water", "Ice", "Steel"};
 

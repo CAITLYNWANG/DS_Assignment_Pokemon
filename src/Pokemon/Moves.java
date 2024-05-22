@@ -15,7 +15,7 @@ public class Moves{
     public String getMoveName() {
         return moveName;
     }
-    
+
 
     public int getAttack() {
         return attack;

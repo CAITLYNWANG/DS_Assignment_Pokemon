@@ -19,7 +19,7 @@ public class Pokemon {
         this.level = level;
         this.hp = hp;
         this.showHp = hp;
-        this.xp = 0;
+        this.xp = xp;
         this.movesList = new ArrayList<>();
     }
 
@@ -45,17 +45,10 @@ public class Pokemon {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String[] getStrongAgainst() {
         return strongAgainst;
@@ -86,9 +79,6 @@ public class Pokemon {
         return level;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
 
     public int getHp() {
         return hp;
@@ -110,9 +100,6 @@ public class Pokemon {
         return movesList;
     }
 
-    public void setXp(int xp) {
-        this.xp = xp;
-    }
     public void xpCheck(){
         while(true){
             if(level <= 10 && xp >= 100){
@@ -132,8 +119,7 @@ public class Pokemon {
             }
         }
     }
-
-
+    
     public void levelUp() {
         this.hp += 20;
         this.showHp += 20;
