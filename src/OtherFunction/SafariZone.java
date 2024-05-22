@@ -5,7 +5,7 @@ import java.util.Scanner;
 import util.StructureService;
 
 public class SafariZone {
-    public void safariZone(){
+    public void safariZoneChallenge(){
         StructureService.lineSeperator();
         System.out.println("Welcome to the Safari Zone! Today's challenge: Sort the Pokémon!");
         StructureService.lineSeperator();
@@ -13,7 +13,6 @@ public class SafariZone {
         System.out.print("Enter the Pokémon in your party (separated by a comma): ");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        scanner.close();
 
        LinkedList<String> pokemons = new LinkedList<>(Arrays.asList(input.split("\\s*,\\s*")));
 
