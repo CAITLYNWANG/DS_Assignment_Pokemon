@@ -37,7 +37,9 @@ public class City {
     public void setGymLeader(GymLeader gymLeader) {
         this.gymLeader = gymLeader;
     }
-
+    public GymLeader getGymLeader(){
+        return this.gymLeader;
+    }
     public List<Connection> getConnections() {
         return connections;
     }
@@ -46,9 +48,9 @@ public class City {
             System.out.print("[");
             for(int i = 0; i < catchablePokemons.size(); i++){
                 if(i < catchablePokemons.size() - 1){
-                    System.out.print(catchablePokemons.get(i) + ", ");
+                    System.out.print(catchablePokemons.get(i).getName() + ", ");
                 }else{
-                    System.out.println(catchablePokemons.get(i) + " are common]");
+                    System.out.println(catchablePokemons.get(i).getName() + " are common]");
                 }
             }
         }else{
@@ -56,7 +58,7 @@ public class City {
         }
     }
 
-    public void displayGymLeader(){
-        gymLeader.toString();
+    public String displayGymLeader(){
+        return gymLeader.toString();
     }
 }
