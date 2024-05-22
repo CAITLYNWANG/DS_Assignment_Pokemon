@@ -18,8 +18,8 @@ public class PokeMaze {
             {'#', '.', '.', '.', '#', '.', '#', '.', '#', '.', '.', '.', '.', '.', '#', '.', '#'},
             {'#', '#', '#', '.', '#', '.', '#', '#', '#', 'G', '#', '.', '#', '.', '#', '#', '#'},
             {'#', '.', '.', '.', '#', '.', '.', '.', '#', '.', '.', '.', '#', '.', '.', '.', '#'},
-            {'#', '#', '#', '#', '#', 'G', '#', '.', '#', '.', '#', '.', '#', '#', '#', '.', '#'},
-            {'#', '.', '.', '.', '.', '.', '.', '.', '.', '#', '.', '.', '.', '.', '.', '.', '#'},
+            {'#', '#', '#', '#', '#', '#', '#', '.', '#', '.', '#', '.', '#', '#', '#', '.', '#'},
+            {'#', '.', '.', '.', '.', 'G', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '#'},
             {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'E', '#'}
     };
     private static void displayMaze(){
@@ -42,23 +42,22 @@ public class PokeMaze {
 
         switch(direction){
             case "up":
-                //Keep moving if the player doesn't encounter a '#' or a 'G' or reach the end 'E'
-                while(newRow > 0 && MAZE[newRow - 1][newCol] != WALL && MAZE[newRow - 1][newCol] != GHASTLY && MAZE[newRow - 1][newCol] != END){
+                while(newRow > 0 && MAZE[newRow - 1][newCol] != WALL){
                     newRow--;
                 }
                 break;
             case "down":
-                while(newRow < MAZE.length - 1 && MAZE[newRow + 1][newCol] != WALL && MAZE[newRow + 1][newCol] != GHASTLY && MAZE[newRow + 1][newCol] != END){
+                while(newRow < MAZE.length - 1 && MAZE[newRow + 1][newCol] != WALL){
                     newRow++;
                 }
                 break;
             case "left":
-                while(newCol > 0 && MAZE[newRow][newCol - 1] != WALL && MAZE[newRow][newCol - 1] != GHASTLY && MAZE[newRow][newCol - 1] != END){
+                while(newCol > 0 && MAZE[newRow][newCol - 1] != WALL){
                     newCol--;
                 }
                 break;
             case "right":
-                while(newCol < MAZE[0].length - 1 && MAZE[newRow][newCol + 1] != WALL && MAZE[newRow][newCol + 1] != GHASTLY && MAZE[newRow][newCol + 1] != END){
+                while(newCol < MAZE[0].length - 1 && MAZE[newRow][newCol + 1] != WALL){
                     newCol++;
                 }
                 break;
