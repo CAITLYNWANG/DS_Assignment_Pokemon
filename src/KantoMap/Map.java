@@ -4,28 +4,39 @@ import java.util.*;
 import Character.Trainer;
 public class Map {
     private ArrayList<City> cities;
-    private boolean isInitialized = false;
     public Map(){
-        if(!isInitialized){
             this.cities = new ArrayList<>();
             initializeCities();
-        }else{
-            //TODO:Implement saving progress here.
-        }
-
-
     }
     private void initializeCities(){
         cities.add(new PalletTown());
         cities.add(new ViridianCity());
         cities.add(new PewterCity());
         cities.add(new CeruleanCity());
-        cities.add(new VermillionCity());
+        cities.add(new VermilionCity());
         cities.add(new LavenderTown());
         cities.add(new CeladonCity());
-        cities.add(new FuschiaCity());
+        cities.add(new FuchsiaCity());
         cities.add(new SaffronCity());
         cities.add(new CinnabarIsland());
+    }
+
+    public City findCityByName(String name) {
+        for (City city : cities) {
+            if (city.getName().equals(name)) {
+                return city;
+            }
+        }
+        return null;
+    }
+
+    private int findCityIndexByName(String cityName){
+        for(int i = 0; i < cities.size(); i++){
+            if(cities.get(i).getName().equalsIgnoreCase(cityName)){
+                return i;
+            }
+        }
+        return -1;
     }
 
     public ArrayList<City> getCities(){
@@ -43,7 +54,7 @@ public class Map {
                 "[  Viridian City  ]         |               |                               |",
                 "    |                       |               |                               |",
                 "    |                       |               |                               |",
-                "    |                       |       [Vermillion City]-----------------------|",
+                "    |                       |       [  Vermilion City ]---------------------|",
                 "    |                       |                                               |",
                 "[  Pallet Town  ]           |                                               |",
                 "    |                       |                                               |",
@@ -68,7 +79,7 @@ public class Map {
         Random random = new Random();
         City destination = null;
         boolean isNextToSaffronCity = true;
-        while(destination == null && isNextToSaffronCity) {
+        while(destination == null && isNextToSaffronCity || destination.getName().equals("Saffron City") ) {
             destination = cities.get(random.nextInt(cities.size()));
             for (Connection adjacentCity : destination.getConnections()) {
                 if (adjacentCity.getCityName().equals("Saffron City")) {
@@ -144,13 +155,6 @@ public class Map {
             }
         }
     }
-    private int findCityIndexByName(String cityName){
-        for(int i = 0; i < cities.size(); i++){
-            if(cities.get(i).getName().equalsIgnoreCase(cityName)){
-                return i;
-            }
-        }
-        return -1;
-    }
+
 
 }
