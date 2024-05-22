@@ -22,7 +22,7 @@ public class GymLeader {
     public String getBadgeName() {
         return badgeName;
     }
-    
+
     public Pokemon getLeaderPokemon() {
         return leaderPokemon;
     }
@@ -38,7 +38,7 @@ public class GymLeader {
 
     @Override
     public String toString(){
-        return (leaderPokemon == null)? "[Your hometown has no Gym.]"
+        return (leaderPokemon == null)? "[This town has no Gym.]"
                 : "[" + leaderName + " - " + leaderPokemon.getType() + " type]";
     }
 }
