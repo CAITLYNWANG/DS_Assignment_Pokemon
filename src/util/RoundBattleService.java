@@ -32,7 +32,7 @@ public class RoundBattleService {
         double trainerAttackRate = 1.0;
         for(String weakType: otherPokemon.getWeakAgainst()){
             if(trainerPokemon.getType().equals(weakType)){
-                System.out.println("Your pokemon" + trainerPokemon.getName() + "'s type " +
+                System.out.println("Your pokemon " + trainerPokemon.getName() + "'s type " +
                         trainerPokemon.getType() + " is strong against the opponent " + otherPokemon.getName());
                 trainerAttackRate += 0.2;
             }
@@ -40,7 +40,7 @@ public class RoundBattleService {
 
         for(String strongType: otherPokemon.getStrongAgainst()){
             if(trainerPokemon.getType().equals(strongType)){
-                System.out.println("Your pokemon" + trainerPokemon.getName() + "'s type " +
+                System.out.println("Your pokemon " + trainerPokemon.getName() + "'s type " +
                         trainerPokemon.getType() + " is weak against the opponent " + otherPokemon.getName());
                 trainerAttackRate -= 0.2;
             }
@@ -55,7 +55,7 @@ public class RoundBattleService {
 
     public void gymLeaderBattle(Trainer trainer,  Pokemon trainerPokemon, GymLeader gymLeader){
         System.out.println("Prepare yourself for an intense battle!");
-        System.out.println("Your Pokémon:");
+        System.out.print("Your Pokémon:");
         System.out.println(trainerPokemon.getName() + " - " + "Level: " + trainerPokemon.getLevel());
         StructureService.lineSeperator();
         System.out.println("Battle Start: Trainer " + trainer.getUsername() + " vs. " + "Gym Leader " + gymLeader.getLeaderName() + "!");
@@ -63,26 +63,27 @@ public class RoundBattleService {
         System.out.println(trainerPokemon.getName() + " is sent out!");
         battle(trainer, trainerPokemon, gymLeader.getLeaderPokemon());
         if(gymLeader.getLeaderPokemon().getHp() <= 0){
-            gymLeader.setDefeated(true);
             trainer.addBadges(gymLeader.getBadgeName());
             System.out.println("Congratulations! You have defeated Gym Leader " + gymLeader.getLeaderName() + " and earned the " + gymLeader.getBadgeName());
         }else{
             gymLeader.getLeaderPokemon().setHp(gymLeader.getLeaderPokemon().getShowHp());
+            trainerPokemon.setHp(trainerPokemon.getShowHp());
         }
 
     }
 
     public void wildPokemonRoundBattle(Trainer trainer, Pokemon trainerPokemon, Pokemon otherPokemon){
         System.out.println("Prepare yourself for an intense battle!");
-        System.out.println("Your Pokémon:");
+        System.out.println("Your Pokémon: ");
         System.out.println(trainerPokemon.getName() + " - " + "Level: " + trainerPokemon.getLevel());
         StructureService.lineSeperator();
         System.out.println("Battle Start: Trainer " + trainer.getUsername() + " vs. " + otherPokemon.getName());
         System.out.println("A wild " + otherPokemon.getName() + " [Level " + otherPokemon.getLevel() + "] " + "appeared!");
         battle(trainer, trainerPokemon, otherPokemon);
         if(otherPokemon.getHp() <= 0){
-            int choice = StructureService.readChoice("The wild " + otherPokemon.getName() + " is weak. Do you want to try to catch it?\n 1. Yes\n 2.No", 2);
+            int choice = StructureService.readChoice("The wild " + otherPokemon.getName() + " is weak. Do you want to try to catch it?\n 1. Yes\n 2. No\n", 2);
             if(choice == 1){
+                otherPokemon.setHp(otherPokemon.getShowHp() / 2);
                 trainer.addNewPokemon(otherPokemon);
             }
         }
@@ -95,11 +96,10 @@ public class RoundBattleService {
         do{
             roundCnt++;
             //Trainer's turn
-            boolean isPlayerTurnEnd = false;
             System.out.println("Round " + roundCnt + ": ");
             System.out.println(trainerPokemon.displayMoves());
             System.out.println("Which move will " + trainerPokemon.getName() + " use?");
-            int choice = StructureService.readChoice("Your choice: ", 2);
+            int choice = StructureService.readChoice("Your choice: ", 2) - 1;
             ArrayList<Moves> trainerPokemonMovesList = trainerPokemon.getMovesList();
             int trainerPokemonAttack =  (int)updatedTrainderAttackRate * trainerPokemonMovesList.get(choice).getAttack();
             System.out.println(trainerPokemon.getName() + " used " + trainerPokemonMovesList.get(choice).getMoveName());
@@ -109,18 +109,24 @@ public class RoundBattleService {
             }else{
                 System.out.print(otherPokemon.getName() + " barely felt that.");
             }
+
+            if(otherPokemon.getShowHp() - trainerPokemonAttack > 0){
+                otherPokemon.setHp(otherPokemon.getHp() - trainerPokemonAttack);
+            }else{
+                otherPokemon.setHp(0);
+            }
+
             showStatus(otherPokemon);
-            otherPokemon.setHp(otherPokemon.getShowHp() - trainerPokemonAttack);
-            if(otherPokemon.getHp() <= 0){
+            if(otherPokemon.getHp() == 0){
                 System.out.println(otherPokemon.getName() + " faints!");
-                System.out.println(trainerPokemon.getName() + " gained " + otherPokemon.getXp() + "xp.");
+                System.out.println(trainerPokemon.getName() + " gained " + otherPokemon.getXp() + " xp.");
                 trainerPokemon.xpCheck();
                 break;
             }
 
-            //Opponent's trun
+            //Opponent's turn
             StructureService.lineSeperator();
-            int otherPokemonChoice = random.nextInt(2) + 1;
+            int otherPokemonChoice = random.nextInt(2);
             ArrayList<Moves> otherPokemonMovesList = otherPokemon.getMovesList();
             int otherPokemonAttack =  (int)updatedOtherAttackRate * otherPokemonMovesList.get(otherPokemonChoice).getAttack();
             System.out.println(otherPokemon.getName() + " used " + otherPokemonMovesList.get(otherPokemonChoice).getMoveName());
@@ -130,8 +136,14 @@ public class RoundBattleService {
             }else{
                 System.out.print(trainerPokemon.getName() + " barely felt that.");
             }
+
+            if(trainerPokemon.getShowHp() - otherPokemonAttack > 0){
+                trainerPokemon.setHp(trainerPokemon.getHp() - trainerPokemonAttack);
+            }else{
+                trainerPokemon.setHp(0);
+            }
+
             showStatus(trainerPokemon);
-            trainerPokemon.setHp(trainerPokemon.getShowHp() - otherPokemonAttack);
             if(trainerPokemon.getHp() <= 0){
                 System.out.println(trainerPokemon.getName() + " faints!");
                 System.out.println("You failed the battle.");
