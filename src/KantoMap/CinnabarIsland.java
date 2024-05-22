@@ -7,7 +7,7 @@ public class CinnabarIsland extends City{
         super("Cinnabar Island");
         //Implement the connection
         this.addConnection("Pallet Town", 7);
-        this.addConnection("Fuschia City", 5);
+        this.addConnection("Fuchsia City", 5);
         //Implement the wild pokemons
         this.addCatchablePokemon(new Grimer());
         this.addCatchablePokemon(new Ponyta());

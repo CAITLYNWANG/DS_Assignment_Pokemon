@@ -3,9 +3,9 @@ import Character.GymLeader;
 import Pokemon.*;
 import Character.LtSurge;
 
-public class VermillionCity extends City{
-    public VermillionCity(){
-        super("Vermillion City");
+public class VermilionCity extends City{
+    public VermilionCity(){
+        super("Vermilion City");
         //Implement the connection
         this.addConnection("Saffron City", 3);
         this.addConnection("Fuschia City", 7);

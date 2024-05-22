@@ -7,10 +7,10 @@ public class LavenderTown extends City{
         //Implement the connection
         this.addConnection("Cerulean City", 9);
         this.addConnection("Saffron City", 3);
-        this.addConnection("Vermillion City", 5);
-        this.addConnection("Fuschia City", 7);
+        this.addConnection("Vermilion City", 5);
+        this.addConnection("Fuchsia City", 7);
         //Implement the Challenge Gym Leader
-        GymLeader gymLeader = null;
+        GymLeader gymLeader = new GymLeader();
         this.setGymLeader(gymLeader);
     }
 }

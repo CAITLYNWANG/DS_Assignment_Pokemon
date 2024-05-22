@@ -12,7 +12,7 @@ public class PalletTown  extends City{
         this.addCatchablePokemon(new Meowth());
         this.addCatchablePokemon(new Scyther());
         //Implement the Challenge Gym Leader
-        GymLeader gymLeader = null;
+        GymLeader gymLeader = new GymLeader();
         this.setGymLeader(gymLeader);
     }
 }

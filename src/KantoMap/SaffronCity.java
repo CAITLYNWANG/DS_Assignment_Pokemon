@@ -7,7 +7,7 @@ public class SaffronCity extends City{
         super("Saffron City");
         //Implement the connection
         this.addConnection("Celadon City", 4);
-        this.addConnection("Vermillion City", 3);
+        this.addConnection("Vermilion City", 3);
         this.addConnection("Lavender Town", 3);
         this.addConnection("Cerulean City", 6);
         //Implement the wild pokemons
