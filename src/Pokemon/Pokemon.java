@@ -96,6 +96,10 @@ public class Pokemon {
         return xp;
     }
 
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
+
     public ArrayList<Moves> getMovesList() {
         return movesList;
     }
@@ -119,7 +123,8 @@ public class Pokemon {
             }
         }
     }
-    
+
+
     public void levelUp() {
         this.hp += 20;
         this.showHp += 20;
@@ -127,7 +132,7 @@ public class Pokemon {
             move.setAttack(move.getAttack() + 2);
         }
         System.out.println(name + " leveled up.");
-        System.out.println(name + "[ Level " + level + " --> " + "Level " + (++level));
+        System.out.println(name + "[Level " + level + " --> " + "Level " + (++level) + "]");
     }
 
     @Override
