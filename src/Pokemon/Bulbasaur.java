@@ -3,7 +3,7 @@ package Pokemon;
 public class Bulbasaur extends Pokemon{
     //Viridian City Catchable
     public Bulbasaur() {
-        super("Bulbasaur", "Poison", 45, 100, 225);
+        super("Bulbasaur", "Poison", 5, 100, 225);
         this.weakAgainst = new String[]{"Fire", "Psychic", "Flying", "Ice"};
         this.strongAgainst = new String[]{"Water", "Electric", "Grass", "Fighting", "Fairy"};
 
