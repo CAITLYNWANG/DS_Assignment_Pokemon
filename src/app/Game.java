@@ -317,6 +317,7 @@ public class Game {
         try(Writer writer = new FileWriter(saveFile)){
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(trainer, writer);
+            System.out.println("Save successfully!");
         }catch(IOException e){
             System.out.println("Cannot save the file.");
             e.printStackTrace();
