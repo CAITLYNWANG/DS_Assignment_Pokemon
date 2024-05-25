@@ -8,7 +8,7 @@ public class VermilionCity extends City{
         super("Vermilion City");
         //Implement the connection
         this.addConnection("Saffron City", 3);
-        this.addConnection("Fuschia City", 7);
+        this.addConnection("Fuchsia City", 7);
         this.addConnection("Lavender Town", 5);
         //Implement the wild pokemons
         this.addCatchablePokemon(new Krabby());
