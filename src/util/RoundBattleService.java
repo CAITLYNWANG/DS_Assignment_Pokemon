@@ -91,7 +91,7 @@ public class RoundBattleService {
 
     private void battle(Trainer trainer, Pokemon trainerPokemon, Pokemon otherPokemon){
         double updatedOtherAttackRate = otherAttackRateCalculate(trainerPokemon, otherPokemon);
-        double updatedTrainderAttackRate = trainerAttackRateCalculate(trainerPokemon, otherPokemon);
+        double updatedTrainerAttackRate = trainerAttackRateCalculate(trainerPokemon, otherPokemon);
         int roundCnt = 0;
         do{
             roundCnt++;
@@ -101,34 +101,39 @@ public class RoundBattleService {
             System.out.println("Which move will " + trainerPokemon.getName() + " use?");
             int choice = StructureService.readChoice("Your choice: ", 2) - 1;
             ArrayList<Moves> trainerPokemonMovesList = trainerPokemon.getMovesList();
-            int trainerPokemonAttack =  (int)updatedTrainderAttackRate * trainerPokemonMovesList.get(choice).getAttack();
+            double trainerPokemonAttack = updatedTrainerAttackRate * trainerPokemonMovesList.get(choice).getAttack();
             System.out.println(trainerPokemon.getName() + " used " + trainerPokemonMovesList.get(choice).getMoveName());
-            if(updatedTrainderAttackRate > 1){
+            if(updatedTrainerAttackRate > 1){
                 System.out.println("It's super effective!");
                 System.out.print(otherPokemon.getName() + "'s HP drops significantly.");
             }else{
                 System.out.print(otherPokemon.getName() + " barely felt that.");
             }
 
-            if(otherPokemon.getShowHp() - trainerPokemonAttack > 0){
-                otherPokemon.setHp(otherPokemon.getHp() - trainerPokemonAttack);
+            if(otherPokemon.getHp() - trainerPokemonAttack > 0){
+                //If the opponent Pokemon isn't defeated
+                int otherPokemonHp = otherPokemon.getHp();
+                otherPokemon.setHp((int)Math.round(otherPokemonHp - trainerPokemonAttack));
             }else{
+                //If the opponent Pokemon is defeated
                 otherPokemon.setHp(0);
             }
 
             showStatus(otherPokemon);
-            if(otherPokemon.getHp() == 0){
+            if(otherPokemon.getHp() <= 0){
                 System.out.println(otherPokemon.getName() + " faints!");
                 System.out.println(trainerPokemon.getName() + " gained " + otherPokemon.getXp() + " xp.");
+                trainerPokemon.setXp(trainerPokemon.getXp() + otherPokemon.getXp());
                 trainerPokemon.xpCheck();
                 break;
             }
 
             //Opponent's turn
             StructureService.lineSeperator();
+            //Opponent Pokemon use moves randomly from its moves list
             int otherPokemonChoice = random.nextInt(2);
             ArrayList<Moves> otherPokemonMovesList = otherPokemon.getMovesList();
-            int otherPokemonAttack =  (int)updatedOtherAttackRate * otherPokemonMovesList.get(otherPokemonChoice).getAttack();
+            double otherPokemonAttack = updatedOtherAttackRate * otherPokemonMovesList.get(otherPokemonChoice).getAttack();
             System.out.println(otherPokemon.getName() + " used " + otherPokemonMovesList.get(otherPokemonChoice).getMoveName());
             if(updatedOtherAttackRate > 1){
                 System.out.println("It's super effective!");
@@ -137,9 +142,12 @@ public class RoundBattleService {
                 System.out.print(trainerPokemon.getName() + " barely felt that.");
             }
 
-            if(trainerPokemon.getShowHp() - otherPokemonAttack > 0){
-                trainerPokemon.setHp(trainerPokemon.getHp() - trainerPokemonAttack);
+            if(trainerPokemon.getHp() - otherPokemonAttack > 0){
+                //If trainer's Pokémon isn't defeated
+                int trainerPokemonHp = trainerPokemon.getHp();
+                trainerPokemon.setHp((int)Math.round(trainerPokemonHp - otherPokemonAttack));
             }else{
+                //If trainer's Pokémon is defeated
                 trainerPokemon.setHp(0);
             }
 
