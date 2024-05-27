@@ -24,8 +24,7 @@ public class Game {
     boolean nameSet = false;
     boolean pokemonSet = false;
     RoundBattleService roundBattleService = new RoundBattleService();
-    HashMap<String, User> users = new HashMap<>();
-    String currentUsername = null;
+    HashMap<String, User> users = new HashMap<>();String currentUsername = null;
 
     protected void begin() {
         StructureService.printASCII("title");
@@ -198,7 +197,7 @@ public class Game {
         while (trainer == null) {
             switch (StructureService.readChoice("--->  ", new String[]{"1a", "1b", "1c", "2a", "2b", "2c", "3"})) {
                 case "1a":
-                    trainer = loadTrainer(getUserSaveFile(currentUsername, Constants.SAVE_FILE_1));
+                    trainer = loadTrainer(currentUsername,getUserSaveFile(currentUsername, Constants.SAVE_FILE_1));
                     if (status1.equals("empty")) {
                         trainer = null;
                         nameSet = false;
@@ -207,7 +206,7 @@ public class Game {
                     }
                     break;
                 case "1b":
-                    trainer = loadTrainer(getUserSaveFile(currentUsername, Constants.SAVE_FILE_2));
+                    trainer = loadTrainer(currentUsername,getUserSaveFile(currentUsername, Constants.SAVE_FILE_2));
                     if (status2.equals("empty")) {
                         trainer = null;
                         nameSet = false;
@@ -216,7 +215,7 @@ public class Game {
                     }
                     break;
                 case "1c":
-                    trainer = loadTrainer(getUserSaveFile(currentUsername, Constants.SAVE_FILE_3));
+                    trainer = loadTrainer(currentUsername,getUserSaveFile(currentUsername, Constants.SAVE_FILE_3));
                     if (status3.equals("empty")) {
                         trainer = null;
                         nameSet = false;
@@ -386,14 +385,15 @@ public class Game {
         return chosenPokemon;
     }
 
-    private static Trainer loadTrainer(String saveFile) {
-        try (Reader reader = new FileReader(saveFile)) {
+    private Trainer loadTrainer(String username, String saveFile) {
+        try (Reader reader = new FileReader(getUserSaveFile(username, saveFile))) {
             Gson gson = new Gson();
             return gson.fromJson(reader, Trainer.class);
         } catch (IOException e) {
             return null;
         }
     }
+
 
     private void saveTrainer(Trainer trainer, String saveFile) {
         try (Writer writer = new FileWriter(saveFile)) {
@@ -406,8 +406,9 @@ public class Game {
         }
     }
 
-    private static String getSaveFileStatus(String saveFile) {
-        Trainer trainer = loadTrainer(saveFile);
+
+    private String getSaveFileStatus(String saveFile) {
+        Trainer trainer = loadTrainer(currentUsername,saveFile);
         if (trainer != null && trainer.getUsername() != null) {
             return trainer.getUsername();
         } else {
