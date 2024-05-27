@@ -125,19 +125,22 @@ public class Game {
 
     private void register() {
         while (true) {
+            String password = "";
             StructureService.lineSeperator();
             System.out.print(ColorText.colorText("Enter new username: ", ColorText.BLUE));
             String username = scanner.next();
             if (users.containsKey(username)) {
                 System.out.println("Username already taken.");
                 printLoginMenu();
+                break;
+            }else{
+                System.out.print(ColorText.colorText("Enter new password: ", ColorText.BLUE));
+                password = scanner.next();
             }
-            System.out.print(ColorText.colorText("Enter new password: ", ColorText.BLUE));
-            String password = scanner.next();
 
             users.put(username, new User(username, password));
             saveUsers();
-            System.out.println("Registration successful! You can now login.");
+            System.out.println("Registration successful! Welcome.");
             return;
         }
     }
