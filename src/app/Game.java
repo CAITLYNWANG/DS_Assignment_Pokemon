@@ -119,6 +119,7 @@ public class Game {
             } else {
                 System.out.println("Invalid username or password. ");
                 printLoginMenu();
+                break;
             }
         }
     }
