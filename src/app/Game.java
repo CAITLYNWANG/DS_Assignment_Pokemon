@@ -172,9 +172,9 @@ public class Game {
     }
 
     public void printBeginningMenu() {
-        String status1 = getSaveFileStatus(Constants.SAVE_FILE_1);
-        String status2 = getSaveFileStatus(Constants.SAVE_FILE_2);
-        String status3 = getSaveFileStatus(Constants.SAVE_FILE_3);
+        String status1 = getSaveFileStatus(getUserSaveFile(currentUsername, Constants.SAVE_FILE_1));
+        String status2 = getSaveFileStatus(getUserSaveFile(currentUsername, Constants.SAVE_FILE_2));
+        String status3 = getSaveFileStatus(getUserSaveFile(currentUsername, Constants.SAVE_FILE_3));
 
         System.out.println("[1]Load Game: ");
         System.out.print("a. Save 1 - " + status1);
@@ -198,31 +198,13 @@ public class Game {
         while (trainer == null) {
             switch (StructureService.readChoice("--->  ", new String[]{"1a", "1b", "1c", "2a", "2b", "2c", "3"})) {
                 case "1a":
-                    trainer = loadTrainer(currentUsername,getUserSaveFile(currentUsername, Constants.SAVE_FILE_1));
-                    if (status1.equals("empty")) {
-                        trainer = null;
-                        nameSet = false;
-                    } else {
-                        nameSet = true;
-                    }
+                    trainer = loadTrainer(currentUsername, getUserSaveFile(currentUsername, Constants.SAVE_FILE_1));
                     break;
                 case "1b":
-                    trainer = loadTrainer(currentUsername,getUserSaveFile(currentUsername, Constants.SAVE_FILE_2));
-                    if (status2.equals("empty")) {
-                        trainer = null;
-                        nameSet = false;
-                    } else {
-                        nameSet = true;
-                    }
+                    trainer = loadTrainer(currentUsername, getUserSaveFile(currentUsername, Constants.SAVE_FILE_2));
                     break;
                 case "1c":
-                    trainer = loadTrainer(currentUsername,getUserSaveFile(currentUsername, Constants.SAVE_FILE_3));
-                    if (status3.equals("empty")) {
-                        trainer = null;
-                        nameSet = false;
-                    } else {
-                        nameSet = true;
-                    }
+                    trainer = loadTrainer(currentUsername, getUserSaveFile(currentUsername, Constants.SAVE_FILE_3));
                     break;
                 case "2a":
                     trainer = new Trainer();
@@ -240,12 +222,15 @@ public class Game {
                     System.exit(0);
             }
             // If the trainer is not set correctly
-            if (trainer == null) {
+            if (trainer == null || trainer.getUsername() == null) {
                 System.out.println("You haven't created a trainer yet.");
                 nameSet = false;
+            } else {
+                nameSet = true;
             }
         }
     }
+
 
     public void printInGameMenu(Trainer trainer) {
         Map map = new Map();
@@ -387,13 +372,14 @@ public class Game {
     }
 
     private Trainer loadTrainer(String username, String saveFile) {
-        try (Reader reader = new FileReader(getUserSaveFile(username, saveFile))) {
+        try (Reader reader = new FileReader(saveFile)) {
             Gson gson = new Gson();
             return gson.fromJson(reader, Trainer.class);
         } catch (IOException e) {
             return null;
         }
     }
+
 
 
     private void saveTrainer(Trainer trainer, String saveFile) {
@@ -409,13 +395,14 @@ public class Game {
 
 
     private String getSaveFileStatus(String saveFile) {
-        Trainer trainer = loadTrainer(currentUsername,saveFile);
+        Trainer trainer = loadTrainer(currentUsername, saveFile);
         if (trainer != null && trainer.getUsername() != null) {
             return trainer.getUsername();
         } else {
             return "empty";
         }
     }
+
 
     private static String needOverride(String status) {
         return (status.equals("empty") ? "new" : "Override");
@@ -424,4 +411,5 @@ public class Game {
     private String getUserSaveFile(String username, String baseFile) {
         return username + "_" + baseFile;
     }
+
 }
