@@ -129,6 +129,7 @@ public class Game {
             StructureService.lineSeperator();
             System.out.print(ColorText.colorText("Enter new username: ", ColorText.BLUE));
             String username = scanner.next();
+            currentUsername = username;
             if (users.containsKey(username)) {
                 System.out.println("Username already taken.");
                 printLoginMenu();
