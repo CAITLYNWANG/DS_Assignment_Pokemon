@@ -10,5 +10,7 @@
 * PokéMaze - Figure your way out (1.5 mark)
 * Rival’s Race - Beat your rival (2 marks)
 * Safari Zone - Queueing up the Pokémon (1.5 mark)
-  ####Extra Features
+
+  
+#### Extra Features
 * Account Creation (1 mark)
