@@ -38,7 +38,6 @@ public class PokemonGUI extends JFrame {
         scrollPane.setPreferredSize(new Dimension(1024, 50));
         add(scrollPane, BorderLayout.SOUTH);
 
-
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 4));
         add(buttonPanel, BorderLayout.NORTH);
@@ -79,7 +78,7 @@ public class PokemonGUI extends JFrame {
     }
 
     private void showLogo() {
-        ImageIcon logoIcon = loadImage("D:/Marceline/Documents/UM study/DS__Pokemon-master/src/image/pokemonlogo");
+        ImageIcon logoIcon = loadImage("image/pokemonlogo");
         if (logoIcon != null) {
             imageLabel.setIcon(logoIcon);
             displayArea.setText("Welcome to Pokemon - Kanto Adventures\n");
@@ -105,19 +104,28 @@ public class PokemonGUI extends JFrame {
     }
 
     private void initializeGymLeaders() {
-        gymLeaders.put("Viridian City", new GymLeader("Giovanni", "D:/Marceline/Documents/UM study/DS__Pokemon-master/src/image/giovanni.jpg"));
-        gymLeaders.put("Pewter City", new GymLeader("Brock", "D:/Marceline/Documents/UM study/DS__Pokemon-master/src/image/brock.webp"));
-        gymLeaders.put("Cerulean City", new GymLeader("Misty", "D:/Marceline/Documents/UM study/DS__Pokemon-master/src/image/misty.webp"));
-        gymLeaders.put("Vermilion City", new GymLeader("Lt. Surge", "D:/Marceline/Documents/UM study/DS__Pokemon-master/src/image/ltsurge.png"));
-        gymLeaders.put("Celadon City", new GymLeader("Erika", "D:/Marceline/Documents/UM study/DS__Pokemon-master/src/image/erika.png"));
-        gymLeaders.put("Fuchsia City", new GymLeader("Koga", "D:/Marceline/Documents/UM study/DS__Pokemon-master/src/image/koga.png"));
-        gymLeaders.put("Saffron City", new GymLeader("Sabrina", "D:/Marceline/Documents/UM study/DS__Pokemon-master/src/image/sabrina.png"));
-        gymLeaders.put("Cinnabar Island", new GymLeader("Blaine", "D:/Marceline/Documents/UM study/DS__Pokemon-master/src/image/blaine.webp"));
-        gymLeaders.put("Lavender Town", new GymLeader("Ghost Master", "D:/Marceline/Documents/UM study/DS__Pokemon-master/src/image/koga.png"));
+        gymLeaders.put("Viridian City",
+                new GymLeader("Giovanni", "image/giovanni.jpg"));
+        gymLeaders.put("Pewter City",
+                new GymLeader("Brock", "image/brock.webp"));
+        gymLeaders.put("Cerulean City",
+                new GymLeader("Misty", "image/misty.webp"));
+        gymLeaders.put("Vermilion City",
+                new GymLeader("Lt. Surge", "image/ltsurge.png"));
+        gymLeaders.put("Celadon City",
+                new GymLeader("Erika", "image/erika.png"));
+        gymLeaders.put("Fuchsia City",
+                new GymLeader("Koga", "image/koga.png"));
+        gymLeaders.put("Saffron City",
+                new GymLeader("Sabrina", "image/sabrina.png"));
+        gymLeaders.put("Cinnabar Island",
+                new GymLeader("Blaine", "image/blaine.webp"));
+        gymLeaders.put("Lavender Town",
+                new GymLeader("Ghost Master", "src/image/koga.png"));
     }
 
     private void displayMap() {
-        ImageIcon mapIcon = loadImage("D:/Marceline/Documents/UM study/DS__Pokemon-master/src/image/map");
+        ImageIcon mapIcon = loadImage("image/map");
         if (mapIcon != null) {
             JFrame mapFrame = new JFrame("Map");
             mapFrame.setSize(1024, 768);
@@ -130,7 +138,7 @@ public class PokemonGUI extends JFrame {
     }
 
     private ImageIcon loadImage(String basePath) {
-        String[] extensions = {".png", ".jpg", ".jpeg", ".webp"};
+        String[] extensions = { ".png", ".jpg", ".jpeg", ".webp" };
         for (String ext : extensions) {
             String path = basePath + ext;
             File imgFile = new File(path);
@@ -144,7 +152,8 @@ public class PokemonGUI extends JFrame {
     private class MoveAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String[] cities = {"Viridian City", "Pewter City", "Cerulean City", "Vermilion City", "Celadon City", "Fuchsia City", "Saffron City", "Cinnabar Island", "Lavender Town"};
+            String[] cities = { "Viridian City", "Pewter City", "Cerulean City", "Vermilion City", "Celadon City",
+                    "Fuchsia City", "Saffron City", "Cinnabar Island", "Lavender Town" };
             String city = (String) JOptionPane.showInputDialog(
                     PokemonGUI.this,
                     "Select a city to move to:",
@@ -152,8 +161,7 @@ public class PokemonGUI extends JFrame {
                     JOptionPane.PLAIN_MESSAGE,
                     null,
                     cities,
-                    currentCity
-            );
+                    currentCity);
 
             if (city != null && city.length() > 0) {
                 currentCity = city;
@@ -167,7 +175,8 @@ public class PokemonGUI extends JFrame {
     }
 
     private void updateCityImage(String city) {
-        String basePath = "D:/Marceline/Documents/UM study/DS__Pokemon-master/src/image/" + city.replace(" ", "").toLowerCase();
+        String basePath = "image/"
+                + city.replace(" ", "").toLowerCase();
         ImageIcon cityIcon = loadImage(basePath);
         if (cityIcon != null) {
             imageLabel.setIcon(cityIcon);
@@ -189,7 +198,7 @@ public class PokemonGUI extends JFrame {
                     JLabel gymLeaderLabel = new JLabel(gymLeaderIcon);
                     gymleaderFrame.add(gymLeaderLabel);
                     gymleaderFrame.setVisible(true);
-                    
+
                     badges.add(gymLeader.getName());
                 } else {
                     displayArea.append("Gym leader image not found for " + currentCity + ".\n");
@@ -199,9 +208,8 @@ public class PokemonGUI extends JFrame {
             }
         }
 
-
         private ImageIcon loadImage(String basePath) {
-            String[] extensions = {".png", ".jpg", ".jpeg", ".webp"};
+            String[] extensions = { ".png", ".jpg", ".jpeg", ".webp" };
             for (String ext : extensions) {
                 String path = basePath + ext;
                 File imgFile = new File(path);
@@ -219,6 +227,7 @@ public class PokemonGUI extends JFrame {
         }
 
     }
+
     private class WildPokemonAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -229,7 +238,7 @@ public class PokemonGUI extends JFrame {
                     "spearow", "staryu", "venonat", "victreebel", "vulpix", "ekans", "exeggutor"
             };
             String randomPokemon = pokemons[random.nextInt(pokemons.length)];
-            String basePath = "D:/Marceline/Documents/UM study/DS__Pokemon-master/src/image/" + randomPokemon;
+            String basePath = "image/" + randomPokemon;
             ImageIcon wildPokemonIcon = loadImage(basePath);
             if (wildPokemonIcon != null) {
                 ImageIcon scaledWildPokemonIcon = scaleImage(wildPokemonIcon, 150, 150);
@@ -239,7 +248,6 @@ public class PokemonGUI extends JFrame {
                 displayArea.append("Wild Pokemon image not found.\n");
             }
         }
-
 
         private ImageIcon scaleImage(ImageIcon icon, int width, int height) {
             Image img = icon.getImage();
@@ -251,7 +259,7 @@ public class PokemonGUI extends JFrame {
     private class OptionsAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String[] options = {"Show map", "Show My Pokemon", "Show My badges", "Save and Exit"};
+            String[] options = { "Show map", "Show My Pokemon", "Show My badges", "Save and Exit" };
             String option = (String) JOptionPane.showInputDialog(
                     PokemonGUI.this,
                     "Select an option:",
@@ -259,8 +267,7 @@ public class PokemonGUI extends JFrame {
                     JOptionPane.PLAIN_MESSAGE,
                     null,
                     options,
-                    "Show map"
-            );
+                    "Show map");
 
             if (option != null && option.length() > 0) {
                 switch (option) {
@@ -344,7 +351,7 @@ class Pokemon implements Serializable {
     private ArrayList<String> weaknesses;
 
     public Pokemon(String name, String type, int level, int hp, Map<String, Integer> moves,
-                   ArrayList<String> strengths, ArrayList<String> weaknesses) {
+            ArrayList<String> strengths, ArrayList<String> weaknesses) {
         this.name = name;
         this.type = type;
         this.level = level;
