@@ -14,4 +14,4 @@
   
 #### Extra Features
 * Account Creation (1 mark)
-*Graphical User Interface
+* Graphical User Interface(1 mark)
