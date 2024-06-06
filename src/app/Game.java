@@ -18,13 +18,19 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+//import library for MySQL
+import java.sql.Connection;
+import java.sql.*;
+
 public class Game {
     Scanner scanner = new Scanner(System.in);
     Trainer trainer = null;
     boolean nameSet = false;
     boolean pokemonSet = false;
     RoundBattleService roundBattleService = new RoundBattleService();
-    HashMap<String, User> users = new HashMap<>();String currentUsername = null;
+    HashMap<String, User> users = new HashMap<>();
+    String currentUsername = null;
+    String playerSetName="";
 
     protected void begin() {
         StructureService.printASCII("title");
@@ -142,9 +148,66 @@ public class Game {
             users.put(username, new User(username, password));
             saveUsers();
             System.out.println("Registration successful! Welcome.");
+            insertUserData(username,password);
             return;
         }
     }
+    public static void insertUserData(String username, String password) {
+
+        String url = "jdbc:mysql://localhost:3306/pokemon?allowPublicKeyRetrieval=true&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
+        // Database credentials
+        final String user = "root";
+        final String pass = "qamarul";
+
+        String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            // Set the values
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            pstmt.executeUpdate();
+
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insertUserAccountData(String username, String location, String team, ArrayList<String> badges) {
+
+        String url = "jdbc:mysql://localhost:3306/pokemon?allowPublicKeyRetrieval=true&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
+        // Database credentials
+        final String user = "root";
+        final String pass = "qamarul";
+
+        String sql = "INSERT INTO useraccount (username, name, location, team, badges) VALUES (?, ?, ?, ?, ?)";
+
+        String listTeam = team.toString();
+        String listBadges = badges.toString();
+
+        try (Connection conn = DriverManager.getConnection(url, user, pass)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            // Set the values for the placeholders
+            pstmt.setString(1, currentUsername);
+            pstmt.setString(2, username);
+            pstmt.setString(3, location);
+            pstmt.setString(4, listTeam);
+            pstmt.setString(5, listBadges);
+
+            pstmt.executeUpdate();
+
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void loadUsers() {
         try (Reader reader = new FileReader(Constants.USER_FILE)) {
@@ -386,6 +449,8 @@ public class Game {
         try (Writer writer = new FileWriter(saveFile)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(trainer, writer);
+            insertUserAccountData(playerSetName, trainer.getLocation(), trainer.getPokemonNames(), trainer.getBadges());
+
             System.out.println("Save successfully!");
         } catch (IOException e) {
             System.out.println("Cannot save the file.");

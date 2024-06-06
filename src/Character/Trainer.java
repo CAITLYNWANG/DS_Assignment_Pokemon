@@ -43,6 +43,18 @@ public class Trainer {
         }
     }
 
+    public String getPokemonNames() {
+        StringBuilder names = new StringBuilder();
+        for (Pokemon pokemon : team) {
+            names.append(pokemon.getName()).append(", ");
+        }
+        // Remove the trailing comma and space
+        if (names.length() > 0) {
+            names.setLength(names.length() - 2);
+        }
+        return names.toString();
+    }
+
     public ArrayList<Pokemon> getTeam() {
         return team;
     }
