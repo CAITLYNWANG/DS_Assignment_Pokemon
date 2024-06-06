@@ -15,4 +15,4 @@
 #### Extra Features
 * Account Creation
 * Graphical User Interface
-* Database Implementation
+* Database Implementation ***Refer to MySQL_instructions.txt in src folder***
