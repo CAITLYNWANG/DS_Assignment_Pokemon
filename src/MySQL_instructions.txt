@@ -1,0 +1,62 @@
+1. install mysql installer
+-https://youtu.be/u96rVINbAUI
+-but at the installer page, instead of install server and workbench, install mysql connectors too.
+
+2. create new connection 
+open mysql workbench, click the plus button
+here is the information :
+
+-Connection name : MyConnection
+-hostname : localhost
+-port : 3306
+-username : root
+
+click store in vault, then set your own password.
+
+3. create new schema
+-click +database logo (3 stacks picture)
+-set name of the schema (mine is pokemon)
+-apply all and next all
+
+4. set up table
+-click +sql button at top left of the workbench
+
+paste this text, then press ctrl+shift+enter
+
+CREATE TABLE useraccount (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255),
+    name VARCHAR(255),
+    location VARCHAR(255),
+    team VARCHAR(255),
+    badges VARCHAR(255)
+);
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255),
+    password VARCHAR(255),
+);
+
+
+5. for my case, im using vs code as my ide. so if you are using vscode, you can follow this instructions but if not you may search it at youtube
+
+-install sqltools extension from vscode extension
+-after done installing click add new connection
+-mysql
+-connection name : MyConnection
+-database : follow the name of your schema (if pokemon then pokemon)
+-username : root
+-connection timeout : 30
+
+for unmentioned information, just let them be~
+
+7. test the game
+-add mysql-connector from lib file to referenced libraries
+
+8. export the table to excel
+https://youtu.be/vHiWWxrGGKs
+
+
+
+
