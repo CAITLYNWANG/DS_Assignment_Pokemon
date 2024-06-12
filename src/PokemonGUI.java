@@ -121,7 +121,7 @@ public class PokemonGUI extends JFrame {
         gymLeaders.put("Cinnabar Island",
                 new GymLeader("Blaine", "image/blaine.webp"));
         gymLeaders.put("Lavender Town",
-                new GymLeader("Ghost Master", "src/image/koga.png"));
+                new GymLeader("Ghost Master", "image/koga.png"));
     }
 
     private void displayMap() {
