@@ -158,7 +158,7 @@ public class Game {
 
         // Database credentials
         final String user = "root";
-        final String pass = "qamarul";
+        final String pass = "root";
 
         String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
 
@@ -183,7 +183,7 @@ public class Game {
 
         // Database credentials
         final String user = "root";
-        final String pass = "qamarul";
+        final String pass = "root";
 
         String sql = "INSERT INTO useraccount (username, name, location, team, badges) VALUES (?, ?, ?, ?, ?)";
 
